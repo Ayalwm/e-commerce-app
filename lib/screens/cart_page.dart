@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   final List<Map<String, dynamic>> cart;
   final Function(Map<String, dynamic>) onRemove;
 
   const CartPage({Key? key, required this.cart, required this.onRemove})
       : super(key: key);
+
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  late List<Map<String, dynamic>> _cartItems;
+
+  @override
+  void initState() {
+    super.initState();
+    _cartItems = List.from(widget.cart); // Copy cart items to local state
+  }
+
+  void _removeFromCart(Map<String, dynamic> product) {
+    setState(() {
+      _cartItems.remove(product);
+    });
+    widget
+        .onRemove(product); // Call the parent function to update cart globally
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +42,7 @@ class CartPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Colors.grey[200],
-      body: cart.isEmpty
+      body: _cartItems.isEmpty
           ? const Center(
               child: Text(
                 'Your cart is empty.',
@@ -40,9 +61,9 @@ class CartPage extends StatelessWidget {
                   mainAxisSpacing: 12,
                   childAspectRatio: 0.7,
                 ),
-                itemCount: cart.length,
+                itemCount: _cartItems.length,
                 itemBuilder: (context, index) {
-                  final product = cart[index];
+                  final product = _cartItems[index];
                   return Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -97,7 +118,7 @@ class CartPage extends StatelessWidget {
                                 child: IconButton(
                                   icon: const Icon(Icons.remove_circle,
                                       color: Colors.redAccent, size: 28),
-                                  onPressed: () => onRemove(product),
+                                  onPressed: () => _removeFromCart(product),
                                 ),
                               ),
                             ],
