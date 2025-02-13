@@ -69,9 +69,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(
           'E-Commerce App',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.indigo,
         centerTitle: true,
         actions: [
           IconButton(
@@ -165,6 +166,8 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) => ProductDetailPage(
                         product: productData,
+                        onAddToCart:
+                            _addToCart, // ✅ Fix: Pass the addToCart function
                       ),
                     ),
                   );
