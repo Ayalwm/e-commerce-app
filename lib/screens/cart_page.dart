@@ -4,8 +4,7 @@ class CartPage extends StatefulWidget {
   final List<Map<String, dynamic>> cart;
   final Function(Map<String, dynamic>) onRemove;
 
-  const CartPage({Key? key, required this.cart, required this.onRemove})
-      : super(key: key);
+  const CartPage({super.key, required this.cart, required this.onRemove});
 
   @override
   _CartPageState createState() => _CartPageState();

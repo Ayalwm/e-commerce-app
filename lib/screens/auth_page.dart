@@ -68,7 +68,7 @@ class _AuthPageState extends State<AuthPage> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                HomePage()), // Navigate to HomePage on success
+                const HomePage()), // Navigate to HomePage on success
       );
     } catch (e) {
       _showError(e.toString());
@@ -124,7 +124,7 @@ class _AuthPageState extends State<AuthPage> {
                 ],
                 const SizedBox(height: 24),
                 isLoading
-                    ? CircularProgressIndicator() // Show loading indicator during registration/login
+                    ? const CircularProgressIndicator() // Show loading indicator during registration/login
                     : _buildAuthButton(),
                 const SizedBox(height: 16),
                 TextButton(
